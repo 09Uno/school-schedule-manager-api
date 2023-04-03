@@ -1,0 +1,4 @@
+1 A versão do spring-boot é a versão 2.7.10
+2 A versão  do java é a versão 11
+3 A dependência Spring MVC está sendo utilizada para definição do projeto WEB
+4 A estrutura de pastas é baseada no MVC
