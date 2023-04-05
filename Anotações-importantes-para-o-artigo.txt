@@ -2,3 +2,4 @@
 2 A versão  do java é a versão 11
 3 A dependência Spring MVC está sendo utilizada para definição do projeto WEB
 4 A estrutura de pastas é baseada no MVC
+5 a autentificação dos usuários é utilizando o springsecurity: https://docs.spring.io/spring-security/site/docs/5.2.1.RELEASE/reference/htmlsingle/#exploits

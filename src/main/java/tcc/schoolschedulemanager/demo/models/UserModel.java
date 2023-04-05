@@ -47,8 +47,8 @@ public class UserModel {
         this.name = name;
         this.registrationNumber = registrationNumber;
         this.password = password;
-        createdAt = createdAt;
-        updatedAt = updatedAt;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public UserModel(String name, String registrationNumber, String password) {
@@ -90,13 +90,13 @@ public class UserModel {
         return createdAt;
     }
     public void setCreatedAt(LocalDate createdAt) {
-        createdAt = createdAt;
+        this.createdAt = createdAt;
     }
     public LocalDate getUpdatedAt() {
         return updatedAt;
     }
     public void setUpdatedAt(LocalDate updatedAt) {
-        updatedAt = updatedAt;
+        this.updatedAt = updatedAt;
     }
 
     public boolean isCoordinator() {
