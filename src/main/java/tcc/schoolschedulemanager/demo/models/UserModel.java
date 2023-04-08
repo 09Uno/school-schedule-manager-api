@@ -1,35 +1,42 @@
 package tcc.schoolschedulemanager.demo.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
-
-
-
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name = "users")
-public class UserModel {
+public class UserModel implements UserDetails {
+
+  private static final long serialVersionUID = 1L;
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private UUID id;
 
-  @Column(name = "name")
+  @Column(name = "name", nullable = false)
   private String name;
 
-  @Column(name = "registration_number")
+  @Column(name = "registration_number", nullable = false, unique = true)
   private String registrationNumber;
 
-  @Column(name = "password")
+  @Column(name = "password", nullable = false)
   private String password;
 
   @JsonFormat(pattern = "dd/MM/yyyy")
@@ -39,34 +46,74 @@ public class UserModel {
   @Column(name = "updated_at")
   private LocalDate updatedAt;
 
-  @Column(name = "role")
-  @Enumerated(EnumType.STRING)
-  private RoleEnum role;
+  @ManyToMany
+  @JoinTable(
+    name = "users_roles",
+    joinColumns = @JoinColumn(name = "user_id"),
+    inverseJoinColumns = @JoinColumn(name = "role_id")
+  )
+  private List<RoleModel> roles = new ArrayList<>();
 
 
 
-  public enum RoleEnum {
-    ADMIN,
-    COORDINATOR,
-    TEACHER,
-    USER,
-}
 
-  public UserModel() {
-  }
-
-  public UserModel(String name, String registrationNumber, String password,   RoleEnum role) {
+  public UserModel(String name, String registrationNumber, String password) {
     this.name = name;
     this.registrationNumber = registrationNumber;
     this.password = password;
-    this.role = role;
+}
+
+public UserModel() {
   }
-  
-public Long getId() {
+
+@Override
+  public Collection<? extends GrantedAuthority> getAuthorities() {
+    // TODO Auto-generated method stub
+
+    return this.roles = roles;
+  }
+
+  @Override
+  public String getPassword() {
+    // TODO Auto-generated method stub
+    return this.password = password;
+  }
+
+  @Override
+  public String getUsername() {
+    // TODO Auto-generated method stub
+    return this.registrationNumber = registrationNumber;
+  }
+
+  @Override
+  public boolean isAccountNonExpired() {
+    // TODO Auto-generated method stub
+    return true;
+  }
+
+  @Override
+  public boolean isAccountNonLocked() {
+    // TODO Auto-generated method stub
+    return true;
+  }
+
+  @Override
+  public boolean isCredentialsNonExpired() {
+    // TODO Auto-generated method stub
+    return true;
+  }
+
+  @Override
+  public boolean isEnabled() {
+    // TODO Auto-generated method stub
+    return true;
+  }
+
+  public UUID getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(UUID id) {
     this.id = id;
   }
 
@@ -84,10 +131,6 @@ public Long getId() {
 
   public void setRegistrationNumber(String registrationNumber) {
     this.registrationNumber = registrationNumber;
-  }
-
-  public String getPassword() {
-    return password;
   }
 
   public void setPassword(String password) {
@@ -110,23 +153,27 @@ public Long getId() {
     this.updatedAt = updatedAt;
   }
 
- 
 
- 
-
-  public RoleEnum getRole() {
-    return role;
+  public static long getSerialversionuid() {
+    return serialVersionUID;
   }
 
-  public void setRole(RoleEnum role) {
-    this.role = role;
+  public List<RoleModel> getRoles() {
+    return roles;
   }
 
-  
-  @PrePersist //indica que o método será executado antes de persistir
+  public void setRoles(List<RoleModel> roles) {
+    this.roles = roles;
+  }
+
+  public void addRole(RoleModel role) {
+    this.roles.add(role);
+  }
+
+  @PrePersist
   public void prePersist() {
-    createdAt = LocalDate.now();
-    role = RoleEnum.USER;
+    final LocalDate now = LocalDate.now();
+    createdAt = now;
   }
 
 }
