@@ -18,7 +18,7 @@ import tcc.schoolschedulemanager.enums.RoleName;
 
 @Entity
 @Table(name = "roles")
-public class RoleModel implements GrantedAuthority , Serializable {
+public class RoleModel implements GrantedAuthority {
 
     private static final long serialVersionUID = 1L;
 

@@ -1,7 +1,6 @@
 package tcc.schoolschedulemanager.demo.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
