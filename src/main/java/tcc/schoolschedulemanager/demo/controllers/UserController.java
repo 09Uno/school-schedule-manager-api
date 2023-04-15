@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import tcc.schoolschedulemanager.demo.config.security.JwtUtil;
 import tcc.schoolschedulemanager.demo.config.security.UserDetailSecurity;
 import tcc.schoolschedulemanager.demo.models.UserModel;
+import tcc.schoolschedulemanager.demo.services.AuthUserService;
 import tcc.schoolschedulemanager.demo.services.CreateUserService;
 
 
@@ -29,35 +30,25 @@ public class UserController  {
     
     private final CreateUserService createUserService;
     
-    private final UserDetailSecurity userDetailSecurity;
-    
-    @Autowired
-    AuthenticationManager authenticationManager;
-    
-    @Autowired
-    JwtUtil JwtUtil;
    
-    public UserController(CreateUserService createUserService, UserDetailSecurity userDetailSecurity) {
+
+    private final AuthUserService authUserService;
+
+    public UserController(CreateUserService createUserService, AuthUserService authUserService) {
         this.createUserService = createUserService;
-        this.userDetailSecurity = userDetailSecurity;
+        this.authUserService = authUserService;
     }
+    
 
-
-    @PostMapping
-    @RequestMapping("/singup")
+    @PostMapping("/sing-up")
     public UserModel register(@RequestBody UserModel user) {
         return createUserService.register(user);
     }
 
-    @PostMapping
-    @RequestMapping("/singin")
+    @PostMapping("/sing-in")
     public ResponseEntity<?> login(@RequestBody UserModel user) {
-        org.springframework.security.core.Authentication authentication = 
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getRegistrationNumber(), user.getPassword()));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        User userAuthed  = (User) authentication.getPrincipal();
-        String token = JwtUtil.generateToken(userAuthed);
-        return ResponseEntity.ok(token);
+       return  authUserService.AuthUserService(user);
 
     }
+
 }
