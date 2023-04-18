@@ -53,22 +53,27 @@ public class UserModel implements UserDetails {
   )
   private List<RoleModel> roles = new ArrayList<>();
 
-
-
-
   public UserModel(String name, String registrationNumber, String password) {
     this.name = name;
     this.registrationNumber = registrationNumber;
     this.password = password;
-}
-
-public UserModel() {
   }
 
-@Override
+  public UserModel(UUID id ) {
+    this.id = id;
+  }
+
+  
+  public UserModel(String name, String registrationNumber) {
+    this.name = name;
+    this.registrationNumber = registrationNumber;
+  }
+
+  public UserModel() {}
+
+  @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     // TODO Auto-generated method stub
-
     return this.roles = roles;
   }
 
@@ -152,7 +157,6 @@ public UserModel() {
     this.updatedAt = updatedAt;
   }
 
-
   public static long getSerialversionuid() {
     return serialVersionUID;
   }
@@ -174,5 +178,4 @@ public UserModel() {
     final LocalDate now = LocalDate.now();
     createdAt = now;
   }
-
 }

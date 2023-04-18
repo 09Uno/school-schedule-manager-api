@@ -1,4 +1,4 @@
-package tcc.schoolschedulemanager.demo.services;
+package tcc.schoolschedulemanager.demo.services.user;
 
 import java.util.Optional;
 
@@ -40,11 +40,13 @@ public class CreateUserService {
     userToSave.setPassword(passwordEncoder().encode(user.getPassword()));
 
     Optional<RoleModel> role = roleRepository.findByName(RoleName.ROLE_USER);
-    if(role.isPresent()){
+    if(!role.isPresent()){
+      throw new RuntimeException("Role not found");
+    }
         RoleModel defaultRole = role.get();
         userToSave.addRole(defaultRole); 
         System.out.println("Role added");
-    }
+    
     return userRepository.save(userToSave);
 
 
