@@ -40,6 +40,34 @@ public class RoleModel implements GrantedAuthority {
     }
 
 
+    
+
+    // public RoleModel(UUID id, RoleName name) {
+    //     this.id = id;
+    //     this.name = name;
+    // }
+
+    public RoleModel(RoleName role) {
+        this.name = role;
+    }
+    
+    public RoleModel() {
+    }
+
+
+
+    public RoleModel(UUID roleId) {
+    }
+
+
+
+
+    public RoleModel( RoleName role,UUID roleId ) {
+        this.id = roleId;
+        this.name = role;
+    }
+
+
 
 
     public static long getSerialversionuid() {

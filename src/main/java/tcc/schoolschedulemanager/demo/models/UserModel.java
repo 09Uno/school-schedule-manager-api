@@ -1,9 +1,13 @@
 package tcc.schoolschedulemanager.demo.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+
+import tcc.schoolschedulemanager.enums.RoleName;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
 import javax.persistence.Column;
@@ -58,16 +62,18 @@ public class UserModel implements UserDetails {
     this.registrationNumber = registrationNumber;
     this.password = password;
   }
-
-  public UserModel(UUID id ) {
+    
+  public UserModel(UUID id, String name, String registrationNumber, List<RoleModel> roles) {
     this.id = id;
-  }
-
-  
-  public UserModel(String name, String registrationNumber) {
     this.name = name;
     this.registrationNumber = registrationNumber;
+    this.roles = roles;
   }
+
+  public UserModel(String idString) {
+    this.id = UUID.fromString(idString);
+  }
+  
 
   public UserModel() {}
 
@@ -172,6 +178,16 @@ public class UserModel implements UserDetails {
   public void addRole(RoleModel role) {
     this.roles.add(role);
   }
+
+  
+
+  @Override
+  public String toString() {
+    return "UserModel [id=" + id + ", name=" + name + ", registrationNumber=" + registrationNumber + ", password="
+        + password + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", roles=" + roles + "]";
+  }
+
+
 
   @PrePersist
   public void prePersist() {
