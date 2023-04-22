@@ -3,7 +3,6 @@ package tcc.schoolschedulemanager.demo.controllers;
 
 import java.util.UUID;
 
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -73,17 +72,22 @@ public class UserController  {
 
     //getById
     @GetMapping("/get-by-id")
-    public ResponseEntity<UserModel> getById(@RequestParam UUID id){
+    public ResponseEntity<UserDTO> getById(@RequestParam UUID id){
         return ResponseEntity.ok(getUserService.getById(id));
     }
 
     //getByName
-    // @GetMapping("/get-by-name")
-    // public ResponseEntity<Page<UserModel>> getByName(@RequestParam String name){
-    //         Pageable pageable = PageRequest.of(0, 10, Sort.by("name"));
-    //         return ResponseEntity.ok(getUserService.getByName(name, pageable));
-    // }
-    //EditById
+    @GetMapping("/get-by-name")
+    public ResponseEntity<Page<UserDTO>> getByName(@RequestBody String name, 
+    @RequestParam(value = "page", defaultValue = "0") int page,
+    @RequestParam(value = "size", defaultValue = "10") int size,
+    @RequestParam(value = "sort", defaultValue = "name,asc") String[] sort
+    ){
+            Pageable pageable = PageRequest.of(0, 10, Sort.by("name"));
+            return ResponseEntity.ok(getUserService.getByName(name, pageable));
+    }
+
+    //editById
     //getByRegistrationNumber
     //DeleteById
 

@@ -13,6 +13,10 @@ import tcc.schoolschedulemanager.demo.models.UserModel;
 public interface UserRepository extends JpaRepository<UserModel, UUID> {
   Optional<UserModel> findByRegistrationNumber(String registrationNumber);
 
-   @Query("SELECT new tcc.schoolschedulemanager.demo.dto.UserDTO(u.id, u.name, r.name, r.id) FROM UserModel u JOIN u.roles r")
-   Page<UserDTO> findAllUsers(Pageable pageable);
+  @Query("SELECT new tcc.schoolschedulemanager.demo.dto.UserDTO(u.id, u.name, u.registrationNumber, roles) FROM UserModel u JOIN u.roles roles")
+  Page<UserDTO> findAllUsers(Pageable pageable);
+
+  @Query("SELECT new tcc.schoolschedulemanager.demo.dto.UserDTO(u.id, u.name, u.registrationNumber, r) FROM UserModel u JOIN u.roles r WHERE u.name LIKE %?1%")
+  Page<UserDTO> findByName(String name, Pageable pageable);
+
 }

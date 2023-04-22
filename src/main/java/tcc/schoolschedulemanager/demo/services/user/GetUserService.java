@@ -1,8 +1,10 @@
 package tcc.schoolschedulemanager.demo.services.user;
 
+
 import java.util.Optional;
 import java.util.UUID;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,20 +24,37 @@ public class GetUserService {
     return userRepository.findAllUsers(pageable);
   }
 
-  public UserModel getById(UUID id){
+  public UserDTO getById(UUID id){
     try {
         Optional<UserModel> user = userRepository.findById(id);
         if(!user.isPresent()){
             throw new IllegalArgumentException("User not found");
         }
-        UserModel response = new UserModel(user.get().getId(), user.get().getName(), user.get().getRegistrationNumber(), user.get().getRoles());
+        UserDTO response = new UserDTO(user.get().getId(), user.get().getName(), user.get().getRegistrationNumber(), user.get().getRoles());
         return response;
     
     } catch (RuntimeException e) {
-        throw new RuntimeException("Error trying to get this user by id" + e);
+        throw new RuntimeException("Error trying to get this user by id " + e);
     }
    
   }
+    
+  public Page<UserDTO> getByName(String body, Pageable pageable){
 
+    JSONObject json = new JSONObject(body);
+    String name = json.getString("body");
+    try {
+
+      Page<UserDTO> user = userRepository.findByName(name, pageable);
+      if(user.isEmpty()){
+        throw new IllegalArgumentException("User not found");
+      }
+      return user;
+
+    } catch (Exception e) {
+      throw new RuntimeException("Error trying to get this user by name " + e);
+    }
+
+  }
 
 }

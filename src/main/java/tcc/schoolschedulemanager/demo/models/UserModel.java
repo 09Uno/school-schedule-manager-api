@@ -28,6 +28,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class UserModel implements UserDetails {
 
   private static final long serialVersionUID = 1L;
+  //Select new tcc.schoolschedulemanager.demo.dto.UserDTO(u.id, u.name, u.registrationNumber, roles) FROM UserModel u JOIN u.roles roles WHERE u.name = %?1% 
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
