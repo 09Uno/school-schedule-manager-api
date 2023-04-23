@@ -19,4 +19,5 @@ public class SchoolScheduleManagerApplication {
   public static void main(String[] args) {
     SpringApplication.run(SchoolScheduleManagerApplication.class, args);
   }
+  
 }

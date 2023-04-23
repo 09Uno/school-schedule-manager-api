@@ -27,3 +27,18 @@ INSERT INTO roles (id, name) VALUES
     (gen_random_uuid(), 'ROLE_COORDINATOR'), 
     (gen_random_uuid(), 'ROLE_USER');
     
+     
+CREATE TABLE courses (
+    id UUID PRIMARY KEY NOT NULL,
+    name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE coordinators (
+    id UUID PRIMARY KEY,
+    user_id UUID REFERENCES users(id),
+    course_id UUID REFERENCES courses(id),
+    created_at DATE NOT NULL DEFAULT CURRENT_DATE,
+    updated_at DATE
+);
+
+
