@@ -1,5 +1,6 @@
 package tcc.schoolschedulemanager.enums;
 
+//Enum para os tipos de roles"
 public enum RoleName {
     
     ROLE_ADMIN,

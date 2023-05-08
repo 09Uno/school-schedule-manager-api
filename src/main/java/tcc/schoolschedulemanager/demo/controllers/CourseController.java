@@ -7,8 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import tcc.schoolschedulemanager.demo.models.CourseModel;
+
 import tcc.schoolschedulemanager.demo.services.course.CourseService;
 
+
+//Controller para os cursos
 @RestController
 @RequestMapping("/api/course")
 public class CourseController {

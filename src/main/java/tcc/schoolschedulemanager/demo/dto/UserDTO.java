@@ -9,6 +9,8 @@ import java.util.UUID;
 import tcc.schoolschedulemanager.demo.models.RoleModel;
 import tcc.schoolschedulemanager.enums.RoleName;
 
+
+//DTO = Data Transfer Object - usado neste código para retornar os dados de um coordenador sem retornar todos os dados do usuario
 public class UserDTO {
     
     private UUID id;
@@ -24,6 +26,7 @@ public class UserDTO {
     //     this.roles.add(new RoleModel(role, roleId));    
     // }
 
+    //construtor para retornar os dados de um coordenador sem retornar todos os dados do usuario
     public UserDTO(UUID id, String name, String registrationNumber, RoleModel role) {
         this.id = id;
         this.name = name;
@@ -32,7 +35,7 @@ public class UserDTO {
     }
     
         
-
+    //construtor para retornar os dados de um coordenador sem retornar todos os dados do usuario 
     public UserDTO(UUID id, String name, String registrationNumber, List<RoleModel> roles) {
         this.id = id;
         this.name = name;

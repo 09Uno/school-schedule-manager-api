@@ -12,6 +12,7 @@ import tcc.schoolschedulemanager.enums.RoleName;
 
 public interface RoleRepository extends JpaRepository<RoleModel, UUID> {
     
+    //faz a busca pelo nome da role no banco de dados
     @Query("SELECT r FROM roles r WHERE r.name = :name")
     Optional<RoleModel> findByName(@Param("name") RoleName roleUser);
 

@@ -20,19 +20,26 @@ import tcc.schoolschedulemanager.enums.RoleName;
 @Table(name = "roles")
 public class RoleModel implements GrantedAuthority {
 
+    // essa linha define uma constante de classe chamada serialVersionUID com um valor numérico longo.
+    // É usada para garantir a compatibilidade da classe serializável ao longo do tempo, permitindo que o mecanismo de 
+    // serialização verifique se a versão da classe é a mesma usada quando os objetos serializados foram criados.
     private static final long serialVersionUID = 1L;
 
+    // @Id define a chave primária
     @Id
+    // @GeneratedValue define a estratégia de geração de valor para a chave primária
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
+    // @Column define o nome da coluna no banco de dados
     @Enumerated(EnumType.STRING)
+    // @Column(name = "name", nullable = false, unique = true) define o nome da coluna no banco de dados, se é nulo e se é único
     @Column(name = "name", nullable = false, unique = true)
     private RoleName name;
 
 
 
-
+    // retorna uma string que representa a autoridade do objeto atual, que é obtida a partir de seu nome convertido em uma string
     @Override
     public String getAuthority() {
         // TODO Auto-generated method stub
@@ -40,12 +47,6 @@ public class RoleModel implements GrantedAuthority {
     }
 
 
-    
-
-    // public RoleModel(UUID id, RoleName name) {
-    //     this.id = id;
-    //     this.name = name;
-    // }
 
     public RoleModel(RoleName role) {
         this.name = role;
@@ -58,8 +59,6 @@ public class RoleModel implements GrantedAuthority {
 
     public RoleModel(UUID roleId) {
     }
-
-
 
 
     public RoleModel( RoleName role,UUID roleId ) {

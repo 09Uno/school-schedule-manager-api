@@ -24,7 +24,7 @@ import tcc.schoolschedulemanager.demo.services.user.AuthUserService;
 import tcc.schoolschedulemanager.demo.services.user.CreateUserService;
 import tcc.schoolschedulemanager.demo.services.user.GetUserService;
 
-
+//Controller para os usuários
 @RestController
 @RequestMapping("/api/user")
 public class UserController  {
@@ -90,6 +90,4 @@ public class UserController  {
     //editById
     //getByRegistrationNumber
     //DeleteById
-
-
 }

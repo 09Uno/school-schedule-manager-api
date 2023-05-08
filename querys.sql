@@ -36,9 +36,15 @@ CREATE TABLE courses (
 CREATE TABLE coordinators (
     id UUID PRIMARY KEY,
     user_id UUID REFERENCES users(id),
-    course_id UUID REFERENCES courses(id),
     created_at DATE NOT NULL DEFAULT CURRENT_DATE,
     updated_at DATE
 );
 
+CREATE TABLE coordinators_courses (
+    coordinator_id UUID NOT NULL,
+    course_id UUID NOT NULL,
+    PRIMARY KEY (coordinator_id, course_id),
+    FOREIGN KEY (coordinator_id) REFERENCES coordinators(id),
+    FOREIGN KEY (course_id) REFERENCES courses(id)
+);
 

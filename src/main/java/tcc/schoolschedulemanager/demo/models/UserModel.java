@@ -2,12 +2,10 @@ package tcc.schoolschedulemanager.demo.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import tcc.schoolschedulemanager.enums.RoleName;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
 import javax.persistence.Column;
@@ -27,10 +25,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Table(name = "users")
 public class UserModel implements UserDetails {
 
+  // essa linha define uma constante de classe chamada serialVersionUID com um valor numérico longo.
+    // É usada para garantir a compatibilidade da classe serializável ao longo do tempo, permitindo que o mecanismo de 
+    // serialização verifique se a versão da classe é a mesma usada quando os objetos serializados foram criados.
   private static final long serialVersionUID = 1L;
-  //Select new tcc.schoolschedulemanager.demo.dto.UserDTO(u.id, u.name, u.registrationNumber, roles) FROM UserModel u JOIN u.roles roles WHERE u.name = %?1% 
 
+  // @Id define a chave primária
   @Id
+  // @GeneratedValue define a estratégia de geração de valor para a chave primária
   @GeneratedValue(strategy = GenerationType.AUTO)
   private UUID id;
 
@@ -50,6 +52,7 @@ public class UserModel implements UserDetails {
   @Column(name = "updated_at")
   private LocalDate updatedAt;
 
+  // @ManyToMany define um relacionamento muitos para muitos
   @ManyToMany
   @JoinTable(
     name = "users_roles",
@@ -58,12 +61,14 @@ public class UserModel implements UserDetails {
   )
   private List<RoleModel> roles = new ArrayList<>();
 
+  //Construtor 
   public UserModel(String name, String registrationNumber, String password) {
     this.name = name;
     this.registrationNumber = registrationNumber;
     this.password = password;
   }
-    
+  
+  //Construtor
   public UserModel(UUID id, String name, String registrationNumber, List<RoleModel> roles) {
     this.id = id;
     this.name = name;
@@ -71,11 +76,12 @@ public class UserModel implements UserDetails {
     this.roles = roles;
   }
 
+  //Construtor
   public UserModel(String idString) {
     this.id = UUID.fromString(idString);
   }
   
-
+  //Construtor
   public UserModel() {}
 
   @Override
@@ -98,7 +104,7 @@ public class UserModel implements UserDetails {
 
   @Override
   public boolean isAccountNonExpired() {
-    // TODO Auto-generated method stub
+    // TODO Auto-generated method 
     return true;
   }
 
@@ -189,7 +195,7 @@ public class UserModel implements UserDetails {
   }
 
 
-
+  // @PrePersist define um método que será executado antes de persistir a entidade no caso a data de criação
   @PrePersist
   public void prePersist() {
     final LocalDate now = LocalDate.now();

@@ -5,9 +5,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import tcc.schoolschedulemanager.demo.dto.CoordinatorDTO;
 import tcc.schoolschedulemanager.demo.models.CoordinatorModel;
 import tcc.schoolschedulemanager.demo.services.coordinator.CoordinatorService;
 
+
+
+//Controller para os coordenadores
 @RestController
 @RequestMapping("/api/coordinator")
 public class CoordinatorController {
@@ -19,7 +23,7 @@ public class CoordinatorController {
     }
 
     @PostMapping("/create")
-    public CoordinatorModel create(@RequestBody CoordinatorModel coordinator) {
+    public CoordinatorDTO create(@RequestBody CoordinatorModel coordinator) {
         return coordinatorService.create(coordinator);
     }
 
