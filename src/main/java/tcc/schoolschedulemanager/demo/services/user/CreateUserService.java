@@ -47,11 +47,11 @@ public class CreateUserService {
     userToSave.setPassword(passwordEncoder().encode(user.getPassword()));
 
     //verifica se a role existe por questões de boas práticas
-    Optional<RoleModel> role = roleRepository.findByName(RoleName.ROLE_USER);
+    Optional<RoleModel> role = roleRepository.findByName(RoleName.ROLE_TEACHER);
     if(!role.isPresent()){
       throw new RuntimeException("Role not found");
     }
-    //adiciona a role ao usuário padrão (ROLE_USER)
+    //adiciona a role ao usuário padrão (ROLE_TEACHER)
         RoleModel defaultRole = role.get();
         userToSave.addRole(defaultRole); 
         System.out.println("Role added");

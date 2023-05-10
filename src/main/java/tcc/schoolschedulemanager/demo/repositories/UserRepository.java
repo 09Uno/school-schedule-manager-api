@@ -20,5 +20,5 @@ public interface UserRepository extends JpaRepository<UserModel, UUID> {
   //faz a busca de usuários pelo nome no banco de dados usando paginação
   @Query("SELECT new tcc.schoolschedulemanager.demo.dto.UserDTO(u.id, u.name, u.registrationNumber, r) FROM UserModel u JOIN u.roles r WHERE u.name LIKE %?1%")
   Page<UserDTO> findByName(String name, Pageable pageable);
-
+  
 }

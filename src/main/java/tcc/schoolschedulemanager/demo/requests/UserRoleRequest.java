@@ -1,4 +1,4 @@
-package tcc.schoolschedulemanager.demo.requests.user;
+package tcc.schoolschedulemanager.demo.requests;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -16,8 +16,8 @@ public class UserRoleRequest {
 
   //Construtor para o JSON para o papel de um usuário
   @JsonCreator
-  public UserRoleRequest(@JsonProperty("user") String idString) {
-    this.user = new UserModel(idString);
+  public UserRoleRequest(@JsonProperty("user") String user_id) {
+    this.user = new UserModel(user_id);
   }
 
   public UserRoleRequest() {}

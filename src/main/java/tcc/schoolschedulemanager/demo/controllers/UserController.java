@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import tcc.schoolschedulemanager.demo.dto.UserDTO;
 import tcc.schoolschedulemanager.demo.models.UserModel;
-import tcc.schoolschedulemanager.demo.requests.user.UserRoleRequest;
+import tcc.schoolschedulemanager.demo.requests.UserRoleRequest;
 import tcc.schoolschedulemanager.demo.services.user.AddRoleService;
 import tcc.schoolschedulemanager.demo.services.user.AuthUserService;
 import tcc.schoolschedulemanager.demo.services.user.CreateUserService;

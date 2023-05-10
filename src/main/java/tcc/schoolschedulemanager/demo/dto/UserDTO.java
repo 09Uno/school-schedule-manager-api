@@ -18,13 +18,8 @@ public class UserDTO {
     private String registrationNumber;
     private List<RoleModel> roles = new ArrayList<>();
 
-    // public UserDTO(UUID id, String name, String registrationNumber, RoleName role, UUID roleId) {
-    //     this.id = id;
-    //     this.name = name;
-    //     this.registrationNumber = registrationNumber;
-    //     this.roles = new ArrayList<>();
-    //     this.roles.add(new RoleModel(role, roleId));    
-    // }
+   
+
 
     //construtor para retornar os dados de um coordenador sem retornar todos os dados do usuario
     public UserDTO(UUID id, String name, String registrationNumber, RoleModel role) {
@@ -33,8 +28,15 @@ public class UserDTO {
         this.registrationNumber = registrationNumber;
         this.roles = Collections.singletonList(role);
     }
+
     
-        
+    
+    public UserDTO(UUID id, String name, String registrationNumber) {
+        this.id = id;
+        this.name = name;
+        this.registrationNumber = registrationNumber;
+    }
+
     //construtor para retornar os dados de um coordenador sem retornar todos os dados do usuario 
     public UserDTO(UUID id, String name, String registrationNumber, List<RoleModel> roles) {
         this.id = id;
@@ -42,6 +44,12 @@ public class UserDTO {
         this.registrationNumber = registrationNumber;
         this.roles = roles;
     }
+
+    public UserDTO(String name, String registrationNumber) {
+        this.name = name;
+        this.registrationNumber = registrationNumber;
+    }
+
 
 
     public UUID getId() {

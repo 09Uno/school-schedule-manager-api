@@ -19,7 +19,7 @@ import tcc.schoolschedulemanager.demo.repositories.UserRepository;
 public class GetUserService {
 
   @Autowired
-  private UserRepository userRepository;
+  private  UserRepository userRepository;
 
   //método para listar todos os usuários
   public Page<UserDTO> getAll(Pageable pageable) {
@@ -42,7 +42,7 @@ public class GetUserService {
    
   }
   
-  //método para buscar um usuário pelo id
+  //método para buscar um usuário pelo nome, retorna uma lista de usuários com o nome buscado
   public Page<UserDTO> getByName(String body, Pageable pageable){
 
     JSONObject json = new JSONObject(body);

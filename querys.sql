@@ -28,23 +28,40 @@ INSERT INTO roles (id, name) VALUES
     (gen_random_uuid(), 'ROLE_USER');
     
      
-CREATE TABLE courses (
-    id UUID PRIMARY KEY NOT NULL,
-    name VARCHAR(255) NOT NULL
+CREATE TABLE COURSES (
+  id UUID PRIMARY KEY NOT NULL,
+  name varchar(50) not null unique,
+  acronym varchar(10) not null unique,
+  description varchar(250) not null 
 );
 
-CREATE TABLE coordinators (
-    id UUID PRIMARY KEY,
-    user_id UUID REFERENCES users(id),
-    created_at DATE NOT NULL DEFAULT CURRENT_DATE,
-    updated_at DATE
+Create table courses_coordinators (
+	course_id UUID NOT NULL,
+   user_id UUID NOT NULL,
+  primary key (course_id, user_id),
+  Foreign key (user_id) references users(id),
+  Foreign key (course_id) references courses(id)
+);
+ 
+Create table courses_teachers (
+	course_id UUID NOT NULL,
+   user_id UUID NOT NULL,
+  primary key (course_id, user_id),
+  Foreign key (user_id) references users(id),
+  Foreign key (course_id) references courses(id)
 );
 
-CREATE TABLE coordinators_courses (
-    coordinator_id UUID NOT NULL,
-    course_id UUID NOT NULL,
-    PRIMARY KEY (coordinator_id, course_id),
-    FOREIGN KEY (coordinator_id) REFERENCES coordinators(id),
-    FOREIGN KEY (course_id) REFERENCES courses(id)
+Create Table Class (
+	    id UUID PRIMARY KEY NOT NULL,
+    	acronym VARCHAR(50) NOT NULL,
+  		course_id UUID References Courses(id) NOT NULL
 );
 
+
+Create table class_teachers (
+	class_id UUID NOT NULL,
+   user_id UUID NOT NULL,
+  primary key (class_id, user_id),
+  Foreign key (user_id) references users(id),
+  Foreign key (class_id) references class(id)
+);

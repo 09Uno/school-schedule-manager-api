@@ -1,12 +1,11 @@
 package tcc.schoolschedulemanager.demo.repositories;
 
-
 import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import tcc.schoolschedulemanager.demo.models.CourseModel;
+import tcc.schoolschedulemanager.demo.models.ClassModel;
 
-public interface CourseRepository extends JpaRepository<CourseModel, UUID>{
-
+public interface ClassRepository extends JpaRepository<ClassModel, UUID>{
+    
 }

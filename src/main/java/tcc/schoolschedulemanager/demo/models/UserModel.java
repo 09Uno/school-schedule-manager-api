@@ -52,7 +52,7 @@ public class UserModel implements UserDetails {
   @Column(name = "updated_at")
   private LocalDate updatedAt;
 
-  // @ManyToMany define um relacionamento muitos para muitos
+  //@ManyToMany define um relacionamento muitos para muitos de usuários e roles
   @ManyToMany
   @JoinTable(
     name = "users_roles",
@@ -60,6 +60,15 @@ public class UserModel implements UserDetails {
     inverseJoinColumns = @JoinColumn(name = "role_id")
   )
   private List<RoleModel> roles = new ArrayList<>();
+
+    //CURSOS
+
+    //TURMAS
+
+    //Disciplinas
+
+    //Horários
+
 
   //Construtor 
   public UserModel(String name, String registrationNumber, String password) {
@@ -187,7 +196,6 @@ public class UserModel implements UserDetails {
   }
 
   
-
   @Override
   public String toString() {
     return "UserModel [id=" + id + ", name=" + name + ", registrationNumber=" + registrationNumber + ", password="
